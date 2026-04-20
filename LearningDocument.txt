@@ -1,0 +1,68 @@
+TITLE: API AUTOMATION DOCUMENTATION
+
+----------------------------------------------------------------------------------------------------
+when you use this installation method
+npm init playwright@latest
+--->"it will ask the following question"
+Getting started with writing end-to-end tests with Playwright:
+Initializing project in '.'
+√ Do you want to use TypeScript or JavaScript? · TypeScript
+√ Where to put your end-to-end tests? · tests
+√ Add a GitHub Actions workflow? (Y/n) · true
+√ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+
+Installing Playwright Test (npm install --save-dev @playwright/test)…
+
+added 3 packages, and audited 4 packages in 8s
+----------------------------------------------------------------------------------------------------
+Recommended: npm install -D @playwright/test typescript ts-node
+Used: npm init playwright@latest
+
+I use -D for Playwright and TypeScript because these are tools for the development lifecycle, not the production runtime. While ts-node is a great tool for running TypeScript directly in Node, I prefer using Playwright’s native execution engine because it’s optimized for speed and doesn't require a separate compilation step, keeping the CI/CD pipeline lean.
+----------------------------------------------------------------------------------------------------
+npx tsc --init
+this command line will create tsconfig.json
+This step is not mandatory but for professional framework development this is highly recommended. it provides a stable development experience. This enforces strict mode of coding so maintenance would be easy for the years to come.
+
+npx playwright test will run without tsconfig.ts 
+----------------------------------------------------------------------------------------------------
+{
+  "compilerOptions": {
+    "target": "ESNext", // to us latest javascript
+    "module": "CommonJS", // node.js compatible format
+    "moduleResolution": "node",
+    "strict": true, // Enforces type errors - Good pactice
+    "esModuleInterop": true,
+    "skipLibCheck": true, // Ignores typechecking inside the module
+    "outDir": "./dist", // When compiled the output is stored in this directory
+    "rootDir": "./"
+  },
+  "include": [
+    "**/*.ts"  // include all the typescript files for complilation
+  ],
+  "exclude": [
+    "node_modules", // Restrict from scanning inside the module.
+    "dist"
+  ]
+}
+
+----------------------------------------------------------------------------------------------------
+EXECUTION FLOW - npx playwright test
+
+"The Hook Flow"
+If an interviewer asks you about the flow, they often mean the Execution Lifecycle within a single test file. Be prepared to explain this:
+
+Global Setup (Runs once per suite)
+
+Worker Setup (Runs once per worker)
+
+BeforeEach (Runs before every test)
+
+Test Body (Your API calls)
+
+AfterEach (Cleanup)
+
+Global Teardown (Final cleanup)
+
+Why mention this? It shows you know how to manage test data. For your restful-booker showcase, you would explain that you use beforeAll to generate your Auth Token, so you don't have to log in repeatedly for every single test. This is an architectural optimization that saves time and resources.
+----------------------------------------------------------------------------------------------------

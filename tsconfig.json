@@ -1,0 +1,20 @@
+  {
+    "compilerOptions": {
+      "target": "ESNext", // to us latest javascript
+      "module": "Node16", //CommonJS", // node.js compatible format
+      "moduleResolution": "node16",
+      "strict": true, // Enforces type errors - Good pactice
+      "esModuleInterop": true,
+      "skipLibCheck": true, // Ignores typechecking inside the module
+      "outDir": "./dist", // When compiled the output is stored in this directory
+      "types": ["node"],
+      "rootDir": "./"
+    },
+    "include": [
+      "**/*.ts"  // include all the typescript files for complilation
+    ],
+    "exclude": [
+      "node_modules", // Restrict from scanning inside the module.
+      "dist"
+    ]
+  }
