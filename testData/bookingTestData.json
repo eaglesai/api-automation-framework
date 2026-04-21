@@ -1,0 +1,35 @@
+[
+  {
+    "firstname": "Josh",
+    "lastname": "Allen",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-01-01",
+      "checkout": "2019-01-01"
+    },
+    "additionalneeds": "super bowls"
+  },
+  {
+    "firstname": "John",
+    "lastname": "Smith",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-01-01",
+      "checkout": "2019-01-01"
+    },
+    "additionalneeds": "Breakfast"
+  },
+  {
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-01-01",
+      "checkout": "2019-01-01"
+    },
+    "additionalneeds": "Extra pillows please"
+  }
+]

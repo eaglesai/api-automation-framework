@@ -6,3 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/Original_tsconfig
+/Original_playwright.config
+/Original_e_xample.spe_c

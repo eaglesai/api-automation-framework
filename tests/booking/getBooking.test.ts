@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { BookingID, Booking } from '../../types/booking.types';
+import testData from '../../testData/bookingTestData';
 
 test('GET API Call - Fetch all Booking records',async({request})=>{
 
@@ -33,4 +34,37 @@ test('GET DETAILS ABOUT THE BOOKING REQUEST ', async({request}) =>{
     console.log('Booking Details  ', JSON.stringify(respBodyDetail,null,2));
     // I would like to have a for loop or while loop -- END FROM HERE  
 
+});
+
+test.only('API request validaation through loop',async ({request}) => {
+
+    console.log("Test Only executed");
+    const respActual = await request.get('/booking'); //this will return booking id's only 
+    expect(respActual.status()).toBe(200);
+
+    const respActualBody: respBookingArray[] = await respActual.json(); 
+
+    console.log(`\n Total number of records  ${respActualBody.length}`);
+    console.log(`\n Total number of expected records  ${testData.length}`);
+
+    const matchedRecord: Booking [] = [];
+    let counter = 1;
+    for (const bookID of respActualBody as BookingID[]){
+        
+        const respActualDetailBody = await request.get('/booking/${bookID.bookingid}'); 
+        //expect(respActualDetailBody.status()).toBe(200); // if the status does return 200 then the program  will exit
+        if (respActualDetailBody.status() !== 200) continue; // if status is not 200 it skips 
+        const actualDetailBody :  Booking = await respActualDetailBody.json();
+        console.log(`checking the output  ${bookID.bookingid}`);
+        console.log(`checking the output from Detail   ${actualDetailBody.firstname}`);
+        
+        for (const expectedbookID of testData as Booking[]){
+            console.log(`checking the output  ${expectedbookID.firstname}`);
+            
+        }
+        if(counter == 3){
+                break;
+            }
+        counter++;
+    }
 });
