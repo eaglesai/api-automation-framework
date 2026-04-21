@@ -16,6 +16,15 @@ export interface Booking {
   bookingdates: BookingDates; //it is an object so this need to be defined separately.
   additionalneeds?: string;  // ← ? means optional
 }
+export interface BookingAndID {
+  bookingid : number;
+  firstname: string;
+  lastname: string;
+  totalprice: number;
+  depositpaid: boolean;
+  bookingdates: BookingDates; //it is an object so this need to be defined separately.
+  additionalneeds?: string;  // ← ? means optional
+}
 
 
 /*

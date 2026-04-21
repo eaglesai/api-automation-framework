@@ -35,8 +35,9 @@ test('GET DETAILS ABOUT THE BOOKING REQUEST ', async({request}) =>{
     // I would like to have a for loop or while loop -- END FROM HERE  
 
 });
-
-test.only('API request validaation through loop',async ({request}) => {
+//--.only means playwright instruct to exucute only that test from the test-suite.
+//test('API request validaation through loop',async ({request}) => {
+ test.only('API request validaation through loop',async ({request}) => { 
 
     console.log("Test Only executed");
     const respActual = await request.get('/booking'); //this will return booking id's only 
@@ -47,7 +48,7 @@ test.only('API request validaation through loop',async ({request}) => {
     console.log(`\n Total number of records  ${respActualBody.length}`);
     console.log(`\n Total number of expected records  ${testData.length}`);
 
-    const matchedRecord: Booking [] = [];
+    const matchedRecord: BookingAndID [] = [];
     let counter = 1;
     for (const bookID of respActualBody as BookingID[]){
         
@@ -60,10 +61,14 @@ test.only('API request validaation through loop',async ({request}) => {
         
         for (const expectedbookID of testData as Booking[]){
             console.log(`checking the output  ${expectedbookID.firstname}`);
-            const isMatch = expectedbookID.firstname === actualDetailBody.firstname;
+            const isMatch = expectedbookID.firstname === actualDetailBody.firstname &&
+            expectedbookID.lastname === actualDetailBody.lastname;
             if(isMatch){
                 console.log(`Matching Record   \n Expected :  ${expectedbookID.firstname}   Actual  ${actualDetailBody.firstname}`);
-                matchedRecord.push(expectedbookID);
+                matchedRecord.push({
+                    bookingid: bookID.bookingid,
+                    ...actualDetailBody
+                });
             }
             
         }
@@ -71,5 +76,13 @@ test.only('API request validaation through loop',async ({request}) => {
                 break;
             }
         counter++;
+    }
+
+    for(const temp of matchedRecord){
+        console.log(`✅ Booking ID ${temp.bookingid} matched! 
+                    → Name     : ${temp.firstname}  ${temp.lastname}
+                    → Price    : ${temp.totalprice}
+                    → Checkin  : ${temp.bookingdates.checkin}
+                    → Checkout : ${temp.bookingdates.checkout}`);
     }
 });
