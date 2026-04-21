@@ -51,7 +51,7 @@ test.only('API request validaation through loop',async ({request}) => {
     let counter = 1;
     for (const bookID of respActualBody as BookingID[]){
         
-        const respActualDetailBody = await request.get('/booking/${bookID.bookingid}'); 
+        const respActualDetailBody = await request.get(`/booking/${bookID.bookingid}`); 
         //expect(respActualDetailBody.status()).toBe(200); // if the status does return 200 then the program  will exit
         if (respActualDetailBody.status() !== 200) continue; // if status is not 200 it skips 
         const actualDetailBody :  Booking = await respActualDetailBody.json();
@@ -60,9 +60,14 @@ test.only('API request validaation through loop',async ({request}) => {
         
         for (const expectedbookID of testData as Booking[]){
             console.log(`checking the output  ${expectedbookID.firstname}`);
+            const isMatch = expectedbookID.firstname === actualDetailBody.firstname;
+            if(isMatch){
+                console.log(`Matching Record   \n Expected :  ${expectedbookID.firstname}   Actual  ${actualDetailBody.firstname}`);
+                matchedRecord.push(expectedbookID);
+            }
             
         }
-        if(counter == 3){
+        if(counter == 20){
                 break;
             }
         counter++;
