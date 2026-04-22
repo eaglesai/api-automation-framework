@@ -45,6 +45,16 @@ npx playwright test will run without tsconfig.ts
     "dist"
   ]
 }
+----------------------------------------------------------------------------------------------------
+GIT COMMANDS
+
+git --version //if you have already installed
+git init
+git add .
+git commit -m "why you are commiting this code"
+git branch -M main
+git remote add origin https repository name
+git push origin main
 
 ----------------------------------------------------------------------------------------------------
 EXECUTION FLOW - npx playwright test
@@ -66,3 +76,16 @@ Global Teardown (Final cleanup)
 
 Why mention this? It shows you know how to manage test data. For your restful-booker showcase, you would explain that you use beforeAll to generate your Auth Token, so you don't have to log in repeatedly for every single test. This is an architectural optimization that saves time and resources.
 ----------------------------------------------------------------------------------------------------
+ERROR: install node to get the errors out
+npm install -D @types/node
+----------------------------------------------------------------------------------------------------
+ERROR: Template iterals will not be able to print
+    console.log(`Last Booking   :  ${resBody[resBody.length -1]}`);
+
+this one works
+   console.log('First Booking:  ', JSON.stringify(resBody[0], null, 2));
+   console.log('Last Booking:   ', JSON.stringify(resBody[resBody.length-1],null,2));
+
+----------------------------------------------------------------------------------------------------
+In Python-Selenium
+Used ActionChains for capturing mouse actions, hovers and keyboard actions or typing.

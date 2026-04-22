@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { BookingID, Booking } from '../../types/booking.types';
-import testData from '../../testData/bookingTestData';
+import { BookingID, Booking, BookingAndID } from '../../types/booking.types';
+import testData from '../../testData/bookingTestData.json';
 
-test('GET API Call - Fetch all Booking records',async({request})=>{
+test.only('GET API Call - Fetch all Booking records',async({request})=>{
 
     const response = await request.get('/booking'); // Wait and get all the booking records and assign it to "response"
     expect(response.status()).toBe(200); // status to be 200
@@ -36,9 +36,8 @@ test('GET DETAILS ABOUT THE BOOKING REQUEST ', async({request}) =>{
 
 });
 //--.only means playwright instruct to exucute only that test from the test-suite.
-//test('API request validaation through loop',async ({request}) => {
- test.only('API request validaation through loop',async ({request}) => { 
-
+//test.only('API request validaation through loop',async ({request}) => { 
+test('API request validaation through loop',async ({request}) => {
     console.log("Test Only executed");
     const respActual = await request.get('/booking'); //this will return booking id's only 
     expect(respActual.status()).toBe(200);
@@ -70,7 +69,6 @@ test('GET DETAILS ABOUT THE BOOKING REQUEST ', async({request}) =>{
                     ...actualDetailBody
                 });
             }
-            
         }
         if(counter == 20){
                 break;
