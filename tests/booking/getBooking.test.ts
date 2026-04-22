@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { BookingID, Booking, BookingAndID } from '../../types/booking.types';
 import testData from '../../testData/bookingTestData.json';
 
-test.only('GET API Call - Fetch all Booking records',async({request})=>{
+test('GET API Call - Fetch all Booking records',async({request})=>{
 
     const response = await request.get('/booking'); // Wait and get all the booking records and assign it to "response"
     expect(response.status()).toBe(200); // status to be 200

@@ -25,6 +25,15 @@ export interface BookingAndID {
   bookingdates: BookingDates; //it is an object so this need to be defined separately.
   additionalneeds?: string;  // ← ? means optional
 }
+export interface USERPWD {
+  username : string;
+  password : string;
+}
+
+export interface BookingToken{
+    bookingid : string;
+}
+
 
 
 /*
